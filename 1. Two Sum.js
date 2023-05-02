@@ -22,6 +22,10 @@ var twoSum = function(nums, target) {
   return null
 };
 
+let twSumHash = (nums, target) => {
+
+}
+
 
 // ==== TESTING =====
 console.log(twoSum([1,4,2,7,11,15], 9))
