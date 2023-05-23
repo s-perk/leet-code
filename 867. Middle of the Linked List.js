@@ -36,10 +36,7 @@ var middleNode = function(head) {
   return middle
 };
 
-let ListNode = function(val) {
-  this.value = val
-  this.next = null
-}
+let ListNode = require('./helper.js').SinglyLinkedListNode
 
 // === TESTING ===
 let node8 = new ListNode(8)

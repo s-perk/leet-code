@@ -57,10 +57,7 @@ var removeNthFromEnd = function(head, n) {
 
 
 // === TESTING ===
-let ListNode = function(val, next) {
-  this.val = (val===undefined ? 0 : val)
-  this.next = (next===undefined ? null : next)
-}
+let ListNode = require('./helper.js').SinglyLinkedListNode
 
 
 let node8 = new ListNode(8)

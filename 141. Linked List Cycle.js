@@ -1,4 +1,4 @@
-const ListNode = require('./helper').ListNode
+
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -36,6 +36,7 @@ var hasCycle = function(head) {
 };
 
 // ==== TESTING ====
+const ListNode = require('./helper').SinglyLinkedListNode
 let list1 = new ListNode(3)
 let list2 = new ListNode(2)
 let list3 = new ListNode(0)
