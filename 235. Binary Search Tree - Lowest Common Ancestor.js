@@ -29,33 +29,24 @@
     - do we need to account for one (or both) of the nodes not being in tree?
 
   Strategy:
-    - set lowest common ancestor to root (at very least this should be in there)
-    - recurse until we find one of the nodes (if we do find one, and not the other, then set to lowest common denom)
-      - continue searching for second - if found as a descendent of first, then it's the first, otherwise it's the root
+    - binary search tree = node is between left and right
+      - left = lower
+      - right = higher
+    - cases:
+      1. if both p and q are lower, then we can recurse with left node
+      2. if both p and q are higher, then we can recurse with right node
+      3. if p and q are split, then current node is the LCA
 */
+
+
 var lowestCommonAncestor = function(root, p, q) {
-
-  let lca = root
-  let level = 0
-  let found = null // this will track the level at which we've found a match
-  let recursion = (node) => {
-    level++
-
-
-    // Base
-    if ((node.val === p.val) || (node.val === q.val)) {
-      found = level
-    }
-
-    // Recursion
-    if (node.left !== null) {recursion(node.left)}
-    if (node.right !== null) {recursion(node.right)}
+  if ((root.val > p.val) && (root.val > q.val)) {
+    return lowestCommonAncestor(root.left, p, q)
+  } else if ((root.val < p.val) && (root.val < q.val)) {
+    return lowestCommonAncestor(root.right, p, q)
   }
-  recursion(root)
-
-  return lca
-
-};
+  return root
+}
 
 
 // ==== TESTING ====
@@ -72,13 +63,15 @@ let berry2 = new TreeNode(5)
 let leaf1 = new TreeNode(0)
 let leaf2 = new TreeNode(4, berry1, berry2)
 let leaf3 = new TreeNode(7)
-let leaf4 = new TreeNode(1)
+let leaf4 = new TreeNode(9)
 
 let branch1 = new TreeNode(2, leaf1, leaf2)
 let branch2 = new TreeNode(8, leaf3, leaf4)
 
 let root = new TreeNode(6, branch1, branch2)
 
-let result = lowestCommonAncestor(root)
+var result = lowestCommonAncestor(root, branch1, branch2) // 6
+var result = lowestCommonAncestor(root, branch1, leaf2) // 2
+var result = lowestCommonAncestor(root, berry2, leaf1) // 2
 
-console.log(result)
+  console.log(result)
