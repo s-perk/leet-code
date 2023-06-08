@@ -10,6 +10,10 @@ const methods = {
     this.left = (left===undefined ? null : left)
     this.right = (right===undefined ? null : right)
   },
+  GraphNode: function (val, neighbors) {
+    this.val = val === undefined ? 0 : val;
+    this.neighbors = neighbors === undefined ? [] : neighbors;
+  },
   buildBinaryTreeFromArray: function(array) {
     // Creating two queues
     //  1. array - input with values

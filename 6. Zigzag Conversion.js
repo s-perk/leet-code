@@ -5,7 +5,7 @@
  */
 
 /*
-  I: string
+  I: string, number of rows
   O: string
   C:
   E:
