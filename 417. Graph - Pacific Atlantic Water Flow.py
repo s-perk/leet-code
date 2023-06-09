@@ -16,7 +16,8 @@
 
   Strategy:
     - Step through entire matrix
-    - Recursively check if cell can reach ocean in each directorion
+    - Recursively check if cell can reach ocean in each direction
+    - As we step through, since we will have already traversed cells to the left and up, we can also flip values to -1 if we've already checked, and
 '''
 
 class Solution:
@@ -36,7 +37,7 @@ class Solution:
 
             # Left
             try:
-                if (c-1 < 0): left = True
+                if (c-1 < 0): return True
                 elif (heights[r][c] >= heights[r][c-1]):
                     left = canReachPacific(r, c-1)
             except:
@@ -44,13 +45,13 @@ class Solution:
 
             # Up
             try:
-                if (r-1 < 0): up = True
+                if (r-1 < 0): return True
                 elif (heights[r][c] >= heights[r-1][c]):
                     up = canReachPacific(r-1, c)
             except:
                 return True
 
-            return left & up
+            return left or up
 
         def canReachAtlantic (r, c):
             # Base: check left and up
@@ -58,7 +59,7 @@ class Solution:
 
             # Right
             try:
-                if (c >= len(heights[r])): right = True
+                if (c >= len(heights[r])): return True
                 elif (heights[r][c] >= heights[r][c+1]):
                     right = canReachAtlantic(r, c+1)
             except:
@@ -66,13 +67,13 @@ class Solution:
 
             # Down
             try:
-                if (r > len(heights)): down = True
+                if (r > len(heights)): return True
                 elif (heights[r][c] >= heights[r+1][c]):
                     down = canReachAtlantic(r+1, c)
             except:
                 return True
 
-            return right & down
+            return right or down
 
 
         # Iterate through matrix
@@ -80,21 +81,31 @@ class Solution:
             for col in range(0, len(heights[row])):
                 if (canReachAtlantic(row, col) and canReachPacific(row, col)):
                     coordinates.append([row, col])
+                # Account for if flow turns in opposite direction before heading to destination
+
+
 
         return coordinates
+
 
 
 
 # ==== TESTING ====
 # Input: heights = [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]
 # Output: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+# print(Solution.pacificAtlantic(None,
+#     [
+#         [1,2,2,3,5],
+#         [3,2,3,4,4],
+#         [2,4,5,3,1],
+#         [6,7,1,4,5],
+#         [5,1,1,2,4]
+#     ]
+
+# ))
 print(Solution.pacificAtlantic(None,
-    [
-        [1,2,2,3,5],
-        [3,2,3,4,4],
-        [2,4,5,3,1],
-        [6,7,1,4,5],
-        [5,1,1,2,4]
-    ]
+    [[1,2,3],
+     [8,9,4],
+     [7,6,5]]
 
 ))
