@@ -93,28 +93,31 @@ var maximumWhiteTiles = function(tiles, carpetLen) {
   tiles = tiles.sort((a, b) => (a[0] - b[0]))
 
   let i = tiles[0][0]
+  let j = 0
   let maxLen = 0
   let currLen = 0
 
 
 
-  while (tiles) {
+  while (j <tiles.length) {
 
     // Check if we've reached end of current range
-    if (i > tiles[0][1]) {
-      tiles.shift()
-      if (tiles.length === 0) {break}
+    if (i > tiles[j][1]) {
+      j++
+      continue
     }
 
     // // If less than the carpet length, just continue
-    if (i > carpetLen) {
-      currLen--
-    }
+    // if (i > carpetLen) {
+    //   currLen--
+    // }
 
     // Check if i is less than start of next range
     // If yes, then we need to subtract
-    if (i < tiles[0][0]) {
-      currLen--
+    if (i < tiles[j][0]) {
+      if (i > carpetLen) {
+        currLen--
+      }
     } else {
       currLen++
     }
