@@ -96,6 +96,7 @@ var maximumWhiteTiles = function(tiles, carpetLen) {
   let j = 0
   let maxLen = 0
   let currLen = 0
+  let queue = [] // will contain the last n values; 1=white; 0=black
 
 
 
@@ -107,45 +108,27 @@ var maximumWhiteTiles = function(tiles, carpetLen) {
       continue
     }
 
-    // // If less than the carpet length, just continue
-    // if (i > carpetLen) {
-    //   currLen--
-    // }
+    // If greater than the carpet length, then need to figure out first value in queue and subtract from total
+    if (queue.length >= carpetLen) {
+      currLen -= queue.shift()
+    }
 
     // Check if i is less than start of next range
-    // If yes, then we need to subtract
     if (i < tiles[j][0]) {
-      if (i > carpetLen) {
+      // If yes, then check if we've reached our carpet length. If so, we need to subtract
+      if (queue.length > carpetLen) {
         currLen--
       }
+      queue.push(0)
     } else {
       currLen++
+      queue.push(1)
     }
 
 
     i++
     maxLen = Math.max(maxLen, currLen)
 
-    // // ... at this point we're within a current range
-
-    // // build up currLen until i is greater than carpetLength
-    // while (i < carpetLen) {
-    //   if (tracker[i] !== undefined) {
-    //     currLen++
-    //   }
-    //   i++
-    //   continue
-    // }
-
-    // // after we have initial window, pan right until we reach end of window
-    // // Remove 1 if left side is in tracker
-    // if (tracker[i-carpetLen]) {
-    //   currLen--
-    // }
-    // // Add 1 if right side is in tracker
-    // if (tracker[i]) {
-    //   currLen++
-    // }
   }
 
 
@@ -161,5 +144,5 @@ var maximumWhiteTiles = function(tiles, carpetLen) {
 // It can be shown that the carpet cannot cover more than 9 white tiles.
 
 console.log(maximumWhiteTiles([[1,5],[10,11],[12,18],[20,25],[30,32]], 10)) // 9
-// console.log(maximumWhiteTiles([[8051,8057],[8074,8089],[7994,7995],[7969,7987],[8013,8020],[8123,8139],[7930,7950],[8096,8104],[7917,7925],[8027,8035],[8003,8011]], 9854)) // 126
-// console.log(maximumWhiteTiles([[5802,5819],[5512,5532],[5749,5749],[5538,5555],[5771,5777],[5856,5873],[5778,5794],[5570,5589],[5751,5763],[5649,5658],[5605,5608],[5641,5641],[5837,5841],[5699,5712],[5485,5487],[5724,5735],[5620,5638],[5493,5494],[5677,5682]], 2327)) // 209
+console.log(maximumWhiteTiles([[8051,8057],[8074,8089],[7994,7995],[7969,7987],[8013,8020],[8123,8139],[7930,7950],[8096,8104],[7917,7925],[8027,8035],[8003,8011]], 9854)) // 126
+console.log(maximumWhiteTiles([[5802,5819],[5512,5532],[5749,5749],[5538,5555],[5771,5777],[5856,5873],[5778,5794],[5570,5589],[5751,5763],[5649,5658],[5605,5608],[5641,5641],[5837,5841],[5699,5712],[5485,5487],[5724,5735],[5620,5638],[5493,5494],[5677,5682]], 2327)) // 209

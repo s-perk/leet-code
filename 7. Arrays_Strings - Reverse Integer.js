@@ -13,50 +13,44 @@
 
 */
 
-var reverse = function(x) {
-
-
-
-
+var reverse = function (x) {
   // convert to string
-  let string = String(x)
-  let negative = false
+  let string = String(x);
+  let negative = false;
 
   // split into array
-  let array = string.split('')
+  let array = string.split('');
 
   // handle negative
   if (array[0] === '-') {
-    negative = true
-    array.shift()
+    negative = true;
+    array.shift();
   }
 
   // Reverse
-  array.reverse()
+  array.reverse();
 
   // join back together
-  string = array.join('')
+  string = array.join('');
 
   // convert to number
   // Does this drop leading zeroes?
-  let num = +string
+  let num = +string;
 
   if (negative) {
-    num *= -1
+    num *= -1;
   }
 
   // Edge cases
-  if ((num < -1 * 2**31) || (num > 2**31 - 1)) {
-    return 0
+  if (num < -1 * 2 ** 31 || num > 2 ** 31 - 1) {
+    return 0;
   }
 
-  return num
-
+  return num;
 };
 
-
 // ==== TESTING ====
-console.log(reverse(123)) // 321
-console.log(reverse(-123)) // -321
-console.log(reverse(120)) // 21
-console.log(reverse(1534236469)) // 0
+console.log(reverse(123)); // 321
+console.log(reverse(-123)); // -321
+console.log(reverse(120)); // 21
+console.log(reverse(1534236469)); // 0
