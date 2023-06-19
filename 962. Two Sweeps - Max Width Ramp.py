@@ -44,7 +44,7 @@ class Solution:
 
         return maxRamp
 
-    def maxWidthRampOld(self, nums) -> int:
+    def maxWidthRampTwoPointers(self, nums) -> int:
         maxRamp = 0
 
         left = 0
