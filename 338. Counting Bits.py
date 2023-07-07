@@ -5,13 +5,15 @@
 
 
 
-  I:
-  O:
+  I: integer
+  O: array
   C:
   E:
 
   Strategy:
-    -
+    - Loop through all numbers 0 to n
+    - Calculate Binary and convert to string
+    - Count number of 1s in string
 '''
 
 import math
@@ -27,8 +29,7 @@ class Solution:
         return array
 
 
-print(bin(10).split('b')[1])
-
+''.index()
 
 # ==== TESTING ====
 # Example 1:

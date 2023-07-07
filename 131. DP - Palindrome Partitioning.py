@@ -14,17 +14,20 @@
     - Memoize to prevent checking multiple strings
 '''
 
+
 class Solution:
     def partition(self, s: str):
         def isPalindrome(string):
             i = 0
-            while i < len(string)/2:
+            while i < len(string) / 2:
                 if string[i] != string[len(string) - 1 - i]:
                     return False
             return True
 
+        {}.values()
 
         return
+
 
 # ==== TESTING ====
 print(Solution.partition(None, 'aab'))
